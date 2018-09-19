@@ -210,10 +210,6 @@ void loop() {
 
 // functions for turning individuals leds on (and the rest off)
 
-void piezoOn() {
-  tone(piezo, 400, 100);
-}
-
 void redOn() {
   analogWrite(ledRed, 255);
   analogWrite(ledBlue, 0);
