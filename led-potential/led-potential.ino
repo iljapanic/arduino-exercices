@@ -25,13 +25,13 @@ void loop() {
   sensorValue = analogRead(meter);
 
   // get potentiometer range (0-1023) and remap its to values for LEDs (0-255)
-  outputValue = map(sensorValue, 0, 1023, 0, 255);
+  outputValue = map(sensorValue, 0, 512, 0, 255);
 
   // pass remaped values to LEDs
   analogWrite(ledRed, outputValue);
+  analogWrite(ledYellow, outputValue);
   analogWrite(ledBlue, outputValue);
   analogWrite(ledGreen, outputValue);
-  analogWrite(ledYellow, outputValue);
 
   // print the values to Serial for easier debugging
   Serial.print("sensor = ");
