@@ -18,11 +18,11 @@ void loop() {
   // read the potenciometer value
   sensorValue = analogRead(photosensor);
 
-  // get photosensor range (0-1023) and remap its to values for LEDs (0-255)
-//  outputValue = map(sensorValue, 0, 1023, 255, 0);
+  // get photosensor range and remap it
+  outputValue = map(sensorValue, 0, 1000, 1000, 0);
 
 
-  if (sensorValue > 400) {
+  if (outputValue < 500) {
     analogWrite(ledGreen, 255);
   } else {
     analogWrite(ledGreen, 0);
@@ -30,10 +30,10 @@ void loop() {
 
   
   // print the values to Serial for easier debugging
-  Serial.print("photosensor-input = ");
+  Serial.print("sensorValue = ");
   Serial.print(sensorValue);
   Serial.print(" ~~~ ");
-  Serial.print("LED-output = ");
+  Serial.print("outputValue = ");
   Serial.println(outputValue);
   
   delay(10);
