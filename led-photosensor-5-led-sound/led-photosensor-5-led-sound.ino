@@ -1,9 +1,9 @@
 // asign inputs-outputs to pins - stay constant
-const int ledGreen = 13;
 const int ledRed = 7;
 const int ledBlue = 6;
 const int ledYellow = 5;
 const int ledClear = 4;
+const int piezo = 13;
 const int photosensor = A0;
 
 // variables that will change throughout the loop
@@ -12,7 +12,7 @@ int outputValue = 0;
 
 // initial setup
 void setup() {
-  pinMode(ledGreen, OUTPUT);
+  pinMode(piezo, OUTPUT);
   pinMode(ledRed, OUTPUT);
   pinMode(ledBlue, OUTPUT);
   pinMode(ledYellow, OUTPUT);
@@ -30,18 +30,20 @@ void loop() {
   outputValue = map(sensorValue, 0, 1023, 1023, 0);
 
 
+
   //  turn on LEDs based on the light coming to the photosesor
-  
-  if (outputValue < 300) {
-    greenOn();
-  } else if (outputValue > 300 && outputValue < 500) {
+  if (outputValue > 300 && outputValue < 500) {
     redOn();
+    tone(piezo, outputValue, 750);
   } else if (outputValue > 500 && outputValue < 600) {
     blueOn();
+    tone(piezo, outputValue, 750);
   } else if (outputValue > 600 && outputValue < 700) {
     yellowOn();
+    tone(piezo, outputValue, 750);
   } else if (outputValue > 700) {
      clearOn();
+     noTone(piezo);
   }
 
   
@@ -60,16 +62,11 @@ void loop() {
 
 // functions for turning individuals leds on (and the rest off)
 
-void greenOn() {
-  analogWrite(ledGreen, 255);
-  analogWrite(ledRed, 0);
-  analogWrite(ledBlue, 0);
-  analogWrite(ledYellow, 0);
-  analogWrite(ledClear, 0);
+void piezoOn() {
+  tone(piezo, 400, 100);
 }
 
 void redOn() {
-  analogWrite(ledGreen, 0);
   analogWrite(ledRed, 255);
   analogWrite(ledBlue, 0);
   analogWrite(ledYellow, 0);
@@ -77,7 +74,6 @@ void redOn() {
 }
 
 void blueOn() {
-  analogWrite(ledGreen, 0);
   analogWrite(ledRed, 0);
   analogWrite(ledBlue, 255);
   analogWrite(ledYellow, 0);
@@ -85,7 +81,6 @@ void blueOn() {
 }
 
 void yellowOn() {
-  analogWrite(ledGreen, 0);
   analogWrite(ledRed, 0);
   analogWrite(ledBlue, 0);
   analogWrite(ledYellow, 255);
@@ -93,7 +88,6 @@ void yellowOn() {
 }
 
 void clearOn() {
-  analogWrite(ledGreen, 0);
   analogWrite(ledRed, 0);
   analogWrite(ledBlue, 0);
   analogWrite(ledYellow, 0);
