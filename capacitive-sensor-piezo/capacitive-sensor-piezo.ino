@@ -2,14 +2,14 @@
 
 CapacitiveSensor capSensor = CapacitiveSensor(2, 4);
 
-int treshold = 3500;
+int treshold = 300;
 
-const int ledPin = 8;
+const int piezo = 8;
 
 
 void setup() {
   Serial.begin(9600);
-  pinMode(ledPin, OUTPUT);
+  pinMode(piezo, OUTPUT);
 }
 
 void loop() {
@@ -17,10 +17,13 @@ void loop() {
 
   Serial.println(sensorValue);
 
+  int outputValue = map(sensorValue, 0, 1000, 0, 10000);
+
+
   if (sensorValue > treshold) {
-    digitalWrite(ledPin, HIGH);
+    tone(piezo, outputValue, 700);
   } else {
-    digitalWrite(ledPin, LOW);
+    noTone(piezo);
   }
   
   delay(10);
