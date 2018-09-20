@@ -3,8 +3,6 @@ int redPin = 11;
 int greenPin = 10;
 int bluePin = 9;
 
-
-
 void setup() {
   pinMode(redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
@@ -16,6 +14,7 @@ void loop() {
   blink();
 
 }
+
 
 void blink() {
   // red
